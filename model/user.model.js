@@ -1,0 +1,67 @@
+import { model, Schema, Types } from "mongoose";
+
+const userSchema = new Schema({
+    userName:{
+        type:String,
+        required:true,
+        minlength:3,
+        maxlength:20,
+    },
+    email:{
+        type:String,
+        required:true,
+        unique:true,
+    },
+    password:{
+        type:String,
+        required:true,
+    },
+    image:{
+        type:Object,
+    },
+    phone:{
+        type:String,
+        length:10,
+    },
+    address:{
+        type:String,
+    },
+    confirmEmail:{
+        type:Boolean,
+        default:false,
+    },
+    gender:{
+        type:String,
+        enum:['Male','Female']
+    },
+    isDeleted:{
+        type:Boolean,
+        default:false,
+    },
+    status:{
+        type:String,
+        default:'Active',
+        enum:['Active','NotActive'],
+    },
+    role:{
+        type:String,
+        enum:['User','Admin','SuperAdmin'],
+        default:'User',
+    },
+    sendCode:{
+        type:String,
+        default:null,
+    },
+    createdBy:{
+        type:Types.ObjectId,
+        ref:'User',
+    },
+    UpdatedBy:{
+        type:Types.ObjectId,
+        ref:'User',
+    }
+},{
+    timestamps:true,
+});
+const UserModel = model('User',userSchema);
+export default UserModel;
