@@ -53,7 +53,7 @@ export const forgetPassword = async(req,res)=>{
         return res.status(404).json({message:"Invalid code"});
     }
 
-    user.password= await bcrypt.hashSync(password,parseInt(process.env.SALTROUNDS));
+    user.password= await bcrypt.hash(password,parseInt(process.env.SALTROUNDS));
     user.sendCode = null;
     user.save();
     return res.status(200).json({message:"success"});
