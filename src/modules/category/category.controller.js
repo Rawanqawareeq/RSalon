@@ -29,13 +29,10 @@ export const updateCategory= async(req,res)=>{
    if(req.file){
      const {secure_url,public_id}= await cloudinary.uploader.upload(req.file.path, {folder:`${process.env.APP_NAME}/categories`});
      category.image = {secure_url,public_id};
-   
    }
    category.status=req.body.status;
    category.updatedBy =req.user._id;
    category.save();
-   
-   
    return res.status(200).json({message:"success",category});
 }
 export const getCategory = async(req,res)=>{
