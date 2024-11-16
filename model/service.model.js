@@ -80,5 +80,10 @@ updatedBy:{
     ref:'User',
 }
 },{timestamps:true});
+serviceSchema.virtual('review',{
+    ref:'review',
+    localField:'_id',
+    foreignField:'serviceId',
+})
 const serviceModel = model('service',serviceSchema);
 export default serviceModel;
