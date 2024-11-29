@@ -6,6 +6,8 @@ import UserRouter from "./modules/user/user.router.js";
 import serviceRouter from "./modules/service/service.router.js";
 import cartRouter from "./modules/cart/cart.router.js";
 import couponRouter from "./modules/coupon/coupon.router.js";
+import appointmentRouter from "./modules/appointment/appointment.router.js";
+import reviewRouter from "./modules/review/review.router.js";
 const initApp =(app,express)=>{
    connectDB();
    app.use(cors());
@@ -17,8 +19,10 @@ const initApp =(app,express)=>{
  app.use('/user',UserRouter);
  app.use('/category',CategoryRouter);
  app.use('/service',serviceRouter);
- app.use('/cart',cartRouter)
-app.use('/coupon',couponRouter)
+ app.use('/cart',cartRouter);
+app.use('/coupon',couponRouter);
+app.use('/appointment',appointmentRouter);
+app.use('/review',reviewRouter);
  app.use('*',(req,res)=>{
     return res.status(404).json({message:"Page not found"});
 

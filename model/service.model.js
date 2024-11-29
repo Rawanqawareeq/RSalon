@@ -84,6 +84,14 @@ serviceSchema.virtual('review',{
     ref:'review',
     localField:'_id',
     foreignField:'serviceId',
-})
+});
+serviceSchema.virtual('review',
+    {
+        ref:'review',
+        localField:'_id',
+        foreignField:'serviceId'
+    }
+);
+
 const serviceModel = model('service',serviceSchema);
 export default serviceModel;

@@ -1,4 +1,3 @@
-import { string } from "joi";
 import { model, Schema, Types } from "mongoose";
 
 const appointmentSchema = new Schema({
@@ -13,7 +12,7 @@ const appointmentSchema = new Schema({
     },
     services:[{
         serviceName:{
-            Type:string,
+            Type:String,
         },
         serviceId:{
             type:Types.ObjectId,
@@ -48,7 +47,7 @@ const appointmentSchema = new Schema({
      },
      status:{
         type:String,
-        enum:['pending','cancelled','confirmed','Rescheduled'],
+        enum:['pending','cancelled','confirmed','Rescheduled','completed'],
         default:'pending',
      },
      notes:{

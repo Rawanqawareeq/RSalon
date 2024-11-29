@@ -77,17 +77,33 @@ export const update = async (req,res)=>{
  return res.status(200).json({message:"success",service:serviceUpdate});
 }
 export const getAll = async(req,res)=>{
-    const service = await serviceModel.find({});
+    const service = await serviceModel.find({}).populate({
+        path:'review',
+        populate:{
+          path:'userId',
+          select:'userName'
+        },
+    });
     return res.status(200).json({message:"success",service});
 }
 export const getActive = async(req,res)=>{
-    const service = await serviceModel.find({status:'Active'});
+    const service = await serviceModel.find({status:'Active'}).populate({
+        path:'review',
+        populate:{
+          path:'userId',
+          select:'userName'
+        },});
     return res.status(200).json({message:"success",service});
 }
 
 export const getDetails = async(req,res)=>{
     const id = req.params.id;
-    const service = await serviceModel.findById(id);
+    const service = await serviceModel.findById(id).populate({
+        path:'review',
+        populate:{
+          path:'userId',
+          select:'userName'
+        },});
     if(!service){
         return res.status(404).json({message:"Service not found"});
     }

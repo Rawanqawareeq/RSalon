@@ -11,7 +11,7 @@ export const createCart = async (req,res)=>{
 
     const {serviceId,day} = req.body;
 
-    const services = await serviceModel.find({_id:serviceId,availabilityDays:day});
+    const services = await serviceModel.find({_id:serviceId,availabilityDays:{$in:day}});
     if(!services){
         return res.status(404).json({message:"This day not available"});
     }
