@@ -11,10 +11,11 @@ export const createCart = async (req,res)=>{
 
     const {serviceId,day} = req.body;
 
-    const services = await serviceModel.find({_id:serviceId,availabilityDays:{$in:day}});
+    const services = await serviceModel.findOne({_id:serviceId,availabilityDays:{$in:day},duration:{$gte:1}});
     if(!services){
-        return res.status(404).json({message:"This day not available"});
+        return res.status(404).json({message:"sory appointment is full or day not available"});
     }
+   
     const cart = await cartModel.findOne({userId:req.user._id});
     if(!cart){
         const newCart = await cartModel.create({userId:req.user._id,services:{serviceId,day}});

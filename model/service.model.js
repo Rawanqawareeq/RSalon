@@ -40,6 +40,7 @@ status:{
 },
 duration: { 
     type: Number, 
+    default:1,
     required: true 
 },
 availabilityDays: { 

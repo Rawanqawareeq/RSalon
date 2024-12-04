@@ -76,7 +76,13 @@ export const create = async(req,res)=>{
    UpdatedBy:req.user._id,
 })
  await cartModel.updateOne({userId:req.user._id},{services:[]});
-   return res.status(200).json({message:"scuess",appointment,session })
+ if(appointment){
+   for(let service of req.body.services){
+      await serviceModel.findOneAndUpdate({_id:service.serviceId},{
+         $inc:{duration:-1} }
+      );
+  }
+ }   return res.status(200).json({message:"scuess",appointment,session })
    
 };
 export const getAllAdmin = async(req,res)=>{
